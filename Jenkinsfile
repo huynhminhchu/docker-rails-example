@@ -8,14 +8,14 @@ pipeline {
         }
         stage('Deploy to staging') {
             steps {
-                sh 'docker-compose run web scripts/wait-for-it.sh db:5432 -- "rake db:create db:migrate"'
                 sh 'docker-compose up'
-                sleep 60
+                sleep 30
+                ./run rails db:setup
             }
         }
         stage('Test'){
             steps {
-                sh 'echo $(curl localhost:8080)'
+                sh 'echo $(curl localhost:8000)'
             }
         }
     }   
