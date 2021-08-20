@@ -10,7 +10,7 @@ pipeline {
             steps {
                 sh 'docker-compose up'
                 sleep 30
-                ./run rails db:setup
+                sh './run rails db:setup'
             }
         }
         stage('Test'){
