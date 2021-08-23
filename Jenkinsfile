@@ -9,9 +9,15 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh 'docker-compose up -d'
-                sleep 5
+                
+            }
+            post { 
+                success {
+                    sleep 5
+                }
             }
         }
+        
         stage('Set up the initial DB'){
             steps {
                 sh './run rails db:setup'
