@@ -13,6 +13,7 @@ pipeline {
             }
             post { 
                 success {
+                    echo 'This is post stage'
                     sleep 5
                 }
             }
