@@ -6,16 +6,26 @@ pipeline {
                 sh 'docker-compose build'
             }
         }
-        stage('Deploy to staging') {
+        stage('Deploy') {
             steps {
                 sh 'docker-compose up -d'
-                sleep 30
+                sleep 5
+            }
+        }
+        stage('Set up the initial DB'){
+            steps {
                 sh './run rails db:setup'
             }
         }
         stage('Test'){
             steps {
-                sh 'echo $(curl localhost:8000)'
+                sh './run rails test'
+                
+            }
+        }
+        post {
+            always {
+                sh 'docker-compose -down'
             }
         }
     }   
