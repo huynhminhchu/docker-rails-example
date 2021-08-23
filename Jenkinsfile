@@ -1,5 +1,8 @@
 pipeline {
     agent { label 'linux' }
+    parameters {
+        string(name: 'WAIT_TIME', defaultValue: '5', description: 'How long should i wait?')
+    }
     stages {
         stage('Build Docker Image') {
             steps {
@@ -14,7 +17,7 @@ pipeline {
             post { 
                 success {
                     echo 'This is post stage'
-                    sleep 5
+                    sleep ${params.WAIT_TIME}
                 }
             }
         }
