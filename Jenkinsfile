@@ -20,13 +20,13 @@ pipeline {
         stage('Test'){
             steps {
                 sh './run rails test'
-                
+                sh 'echo $(curl localhost:8000)'
             }
         }
     }
     post {
         always {
-            sh 'docker-compose -down'
+            sh 'docker-compose down'
         }
     }
      
