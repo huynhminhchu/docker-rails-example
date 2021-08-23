@@ -17,7 +17,7 @@ pipeline {
             post { 
                 success {
                     echo 'This is post stage'
-                    sleep ${params.WAIT_TIME}
+                    sleep "${params.WAIT_TIME}"
                 }
             }
         }
